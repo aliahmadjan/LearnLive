@@ -7,6 +7,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import React, { useState } from "react";
 import ClassIcon from '@mui/icons-material/Class';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import CalendarIcon from '@mui/icons-material/CalendarMonth';
 import Face6Icon from '@mui/icons-material/Face6';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AddIcon from '@mui/icons-material/Add';
@@ -30,6 +31,11 @@ const initial_menuItems = [
       
       icon: <AssignmentIcon/>
     },
+    {
+      title: "Calendar",
+      path: '/calendar/viewcalendar',
+      icon: <CalendarIcon/>
+    }
 
     ]
   },
