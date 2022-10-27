@@ -18,7 +18,7 @@ connection.once('open', () => {
 })
 */ 
   //upload new assignment
-  router.post('/uploadassignment', newAssignmentController.uploadAssignment)
+  router.post('/uploadassignment/post', newAssignmentController.uploadAssignment)
 
   // view all assignments
   router.get('/viewassignments',newAssignmentController.getAllAssignments)

@@ -12,6 +12,7 @@ import Face6Icon from '@mui/icons-material/Face6';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AddIcon from '@mui/icons-material/Add';
 import QuizIcon from '@mui/icons-material/Quiz';
+import TurnedInIcon from '@mui/icons-material/TurnedIn';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 const drawerWidth = 240;
 const initial_menuItems = [
@@ -35,6 +36,11 @@ const initial_menuItems = [
       title: "Calendar",
       path: '/calendar/viewcalendar',
       icon: <CalendarIcon/>
+    },
+    {
+      title: "Submit Assignments",
+      path : '/assignments/submitassignment',
+      icon: <TurnedInIcon/>
     }
 
     ]
