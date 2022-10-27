@@ -5,6 +5,7 @@ import UploadAssignment from "../pages/Teacher/UploadAssignment";
 import ViewAssignments from "../pages/Teacher/ViewAssignments"
 import EditAssignment  from "../pages/Teacher/EditAssignment";
 import AssignmentInfo from "../pages/Teacher/AssignmentInfo";
+import ViewCalendar from "../pages/Calendar/ViewCalendar";
 
 //import RandomLogin from "../pages/SignIn/RandomLogin";
 
@@ -28,6 +29,7 @@ export const LoggedOutRoutes = () => {
          <Route path="/assignments/viewassignments" element={<ViewAssignments />} />
          <Route path="/assignments/edit/:assignmentno" element={<EditAssignment />} />
          <Route path="/assignments/:assignmentno" element={<AssignmentInfo />} />
+         <Route path="/calendar/viewcalendar" element={<ViewCalendar/>}/>
     </Routes>
     );
     return routes;

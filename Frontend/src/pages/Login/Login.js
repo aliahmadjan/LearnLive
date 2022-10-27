@@ -48,7 +48,7 @@ const [errorMessage, setErrorMessage] = useState("");
       {
         auth.setUser(log.data.emailaddress);
         auth.login();
-        window.alert("Signup success");
+        window.alert("Sign-in successful");
       }
       })
       .catch((err) => {
