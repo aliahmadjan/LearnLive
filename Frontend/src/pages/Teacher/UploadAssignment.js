@@ -12,16 +12,82 @@ import { uploadAssignment } from "../../services/Userservice";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import InputLabel from "@mui/material/InputLabel";
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"
+import { Viewer } from '@react-pdf-viewer/core';
+import { Worker} from '@react-pdf-viewer/core';
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+
+
+const events = [];
 
 const UploadAssignment = () => {
+
+  const [newEvent, setNewEvent] = useState({ title: "", start: "", end: "" });
+  const [allEvents, setAllEvents] = useState(events);
+
+  function handleAddEvent() {
+      setAllEvents([...allEvents, newEvent]);
+  }
+
+
+  // creating new plugin instance
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
+
   const [submitStatus, setSubmitStatus] = useState(0);
-  const [selectedFile, setSelectedFile] = useState("");
-  const [fileInputState, setFileInputState] = useState("");
-  const [previewSource, setPreviewSource] = useState("");
-  const [startDate , setStartDate ] = useState(new Date());
-  const [endDate , setEndDate ] = useState(new Date());
+   
+  //for onChange event
+  const [pdfFile, setPdfFile] = useState(null);
+  const [pdfFileError,setPdfFileError ] = useState('');
+
+  // for submit event
+  const [viewPdf , setViewPdf]= useState(null);
+
+  //onchange event
+   const fileType = ['application/pdf'];
+  //const fileType = ['application/vnd.openxmlformats-officedocument.presentationml.presentation']
+  const handlePdfFileChange = (e) =>
+  {
+  let selectedFile = e.target.files[0];
+  if(selectedFile)
+  {
+    if(selectedFile && fileType.includes(selectedFile.type)){
+       let reader = new FileReader();
+       reader.readAsDataURL(selectedFile);
+       reader.onloadend = (e) => {
+        setPdfFileError('')
+        setPdfFile(e.target.result); //setPreviewSource
+        console.log(reader.result)
+        
+       }
+    }
+    else{
+      setPdfFileError('Please select valid pdf file');
+      setPdfFile('');
+      
+    }
+  }
+  else{
+    console.log("Please Select a PDF");
+  }
+  } 
+
+
+  // form submit 
+  const handlePdfFileSubmit = (e) => {
+    e.preventDefault();
+    if(pdfFile!==null){
+      setViewPdf(pdfFile);
+    }
+    else{
+      setViewPdf(null);
+    }
+  }
+
+
+
   const [formState, InputHandler] = useForm(
     {
       assignmentno:{
@@ -39,12 +105,7 @@ const UploadAssignment = () => {
       marks: {
         value: "",
         isValid: false,
-      },
-      duedate :{
-        value:"",
-        isValid: false,
       }
-      
     },
     false
   );
@@ -55,23 +116,27 @@ const UploadAssignment = () => {
   const [snackOpen, setSnackOpen] = React.useState(false);
 
   const assignmentSubmitHandler = () => {
-    const image = previewSource || '';
-     console.log(previewSource)
+     const file = pdfFile || '';
+     console.log(file)
     uploadAssignment (
       formState.inputs.assignmentno.value,
       formState.inputs.topic.value,
       formState.inputs.description.value,
       formState.inputs.marks.value,
-      formState.inputs.duedate.value,
-      image
+      
+      file,
+      console.log("HELLO",file)
     )
+
       .then((res) => {
         if (res.status === 201) {
           console.log(res);
           setSubmitStatus(1);
+          //setPdfFileError(1);
           setSnackOpen(true);
         } else {
           setSubmitStatus(-1);
+          //setPdfFileError(-1);
           setSnackOpen(true);
         }
       })
@@ -81,7 +146,7 @@ const UploadAssignment = () => {
         setSnackOpen(true);
       });
     console.log(formState.inputs);
-    console.log("Image: ", image)
+    console.log("Image: ", file)
   };
 
   const StatusAlert = () => {
@@ -147,6 +212,8 @@ const UploadAssignment = () => {
           <Typography variant="h5">New Assignment</Typography>
         </Box>
 
+       
+        
         <Box
           sx={{
             display: "flex",
@@ -193,16 +260,11 @@ const UploadAssignment = () => {
             validators={[VALIDATOR_MIN(10)]}
             errorText="Total Marks must be entered"
           />
-          <DatePicker
-          placeholderText="Select Date"
-          label="Due Date"
-          selected={startDate}
-          selectsStart
-          startDate={startDate}
-          endDate = {endDate}
-          onChange={duedate => setStartDate(duedate)}
-          
-          />
+
+     
+      
+           
+
          
           <Box
             sx={{
@@ -217,11 +279,18 @@ const UploadAssignment = () => {
             <InputLabel sx={{ p: "-1px", w: "100%" }}>
               Assignment
             </InputLabel>
-            
+
+            <input
+              style={{
+                display: "inline-block",
+                padding: "6px 12px",
+                cursor: "pointer",
+              }}
+              id="imagefile"
+              type="file"
+              onChange={handlePdfFileChange}
+            />
           </Box>
-        
-
-
           <Grid container display="flex" justifyContent="flex-end">
             <Button
               onClick={onSubmitHandler}
@@ -235,6 +304,8 @@ const UploadAssignment = () => {
           </Grid>
         </Box>
       </Card>
+     
+      
       <Snackbar
         open={snackOpen}
         autoHideDuration={6000}
@@ -243,6 +314,7 @@ const UploadAssignment = () => {
       >
         <div>
           <StatusAlert />
+          
         </div>
       </Snackbar>
     </Grid>

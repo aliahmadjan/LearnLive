@@ -1,0 +1,19 @@
+.question-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.options-container {
+    display: flex;
+    margin-top: 12px;
+}
+
+.options-container > input {
+    margin: 2px 2px;
+}
+.question-line {
+    width: 720px;
+    height: 40px;
+    margin-left: 16px;
+}

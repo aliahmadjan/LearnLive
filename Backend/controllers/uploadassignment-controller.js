@@ -45,10 +45,10 @@ const uploadAssignment = async (req, res, next) => {
       const topic = req.body.topic;
       const description = req.body.description;
       const marks = req.body.marks;
-      // const image = req.body.image;
-       //console.log("HEY", image);
+      const image = req.body.image || "";
+      console.log("HEY", image);
       var uploadResponse;
-      /*
+      
       if (image !== "") {
         console.log("HI");
         uploadResponse = await cloudinary.uploader.upload(image, {
@@ -60,13 +60,13 @@ const uploadAssignment = async (req, res, next) => {
         console.log("HELLO1");
         uploadResponse = { public_id: "" };
       }
-     */
+     
       const newAssignment = new newassignment({
         assignmentno,
         topic,
         description,
-        marks 
-       // image: uploadResponse.public_id
+        marks, 
+        image: uploadResponse.public_id
       });
   
       newAssignment

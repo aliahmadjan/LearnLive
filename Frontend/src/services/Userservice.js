@@ -1,4 +1,5 @@
 import axios from "axios";
+
 let URL = "http://localhost:5000/";
 
 export async function login(emailaddress, password) {
@@ -15,12 +16,13 @@ export async function login(emailaddress, password) {
 }
 
 
-export async function uploadAssignment(assignmentno,topic, description, marks) {
-  let tempURL = URL + "assignments/uploadassignment";
+export async function uploadAssignment(assignmentno,topic,description,marks,file) {
+  let tempURL = URL + "assignments/uploadassignment/post";
   console.log(tempURL);
   const response = await axios.post(tempURL, {
-    assignmentno,topic,description,marks
+    assignmentno,topic,description,marks,file
   });
+  console.log("MFSSSSS",file)
   if (response.status === 201) {
     return response;
   } else if (response.status === 401) {

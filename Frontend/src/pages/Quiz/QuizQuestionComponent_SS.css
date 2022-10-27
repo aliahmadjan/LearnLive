@@ -1,0 +1,19 @@
+.question-container {
+    display: flex;
+    background-color: black;
+    color: aliceblue;
+    align-items: center;
+}
+
+.options-container {
+    width: 70%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: black;
+}
+
+legend {
+    padding-top: 12px;
+}
