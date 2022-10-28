@@ -1,6 +1,9 @@
 import { useState } from "react"
 import QuizQuesionsInfo from "./QuizQuestionsInfo"
 import "./QuizInfo.css"
+import { Button } from "@mui/material"
+import QuizIcon from '@mui/icons-material/Quiz';
+
 
 const QuizInfo =() => {
 
@@ -36,8 +39,17 @@ const QuizInfo =() => {
         <div className="container">
             <h2>Fill Out Details</h2>
             <h3>Enter the number of questions</h3>
-            <input type="text" name="noOfQuestions" value={details.noOfQuestions} onChange={handleChange}/>
-            <button onClick={makeQuiz}>Make Quiz</button>
+            <input type="text" name="noOfQuestions" height="200%"value={details.noOfQuestions} onChange={handleChange}/>
+            <Button
+            onClick={makeQuiz}
+              variant="contained"
+              startIcon={<QuizIcon />}
+              sx={{ mt: 2 }}
+              
+             >
+                Make Quiz
+            </Button>
+           
         </div>
     )
 }

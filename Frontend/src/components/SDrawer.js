@@ -56,7 +56,7 @@ const initial_menuItems = [
     },
 
     {
-      title: "View Quizzes",
+      title: "Attemp Quiz",
       path:'/quizzes/viewquiz',
       icon: <QuizIcon/>
     }
