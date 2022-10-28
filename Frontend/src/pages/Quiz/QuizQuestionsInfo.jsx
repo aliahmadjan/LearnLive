@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
 import QuizQuestionComponent from "./QuizQuestionComponent"
+import { Button } from "@mui/material"
+import QuizIcon from '@mui/icons-material/Quiz';
 
 function QuizQuesionsInfo(props){
 
@@ -55,7 +57,15 @@ function QuizQuesionsInfo(props){
     return (
         <div className="container">
             {questionElements}
-            <button onClick={createQuiz}>Create</button>
+            <Button
+            onClick={createQuiz}
+              variant="contained"
+              startIcon={<QuizIcon />}
+              sx={{ mt: 2 }}
+              
+             >
+                Create 
+            </Button>
         </div>
     )
 }

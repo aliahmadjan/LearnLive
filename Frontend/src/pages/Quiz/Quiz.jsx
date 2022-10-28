@@ -1,6 +1,8 @@
 import { useState } from "react"
 import QuizQuestions from "./QuizQuestions"
 import "./Quiz.css"
+import { Button } from "@mui/material"
+import QuizIcon from '@mui/icons-material/Quiz';
 
 function Quiz(){
 
@@ -15,7 +17,15 @@ function Quiz(){
         <QuizQuestions />
         :
         <div className="container">
-            <button onClick={takeQuiz}>Take Quiz</button>
+            <Button
+            onClick={takeQuiz}
+              variant="contained"
+              startIcon={<QuizIcon />}
+              sx={{ mt: 2 }}
+              
+             >
+                Attempt Quiz
+            </Button>
         </div>
     )
 }

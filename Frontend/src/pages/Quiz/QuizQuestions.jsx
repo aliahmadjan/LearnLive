@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import QuizQuestionComponent_SS from "./QuizQuestionComponent_SS"
 import QuizResult from "./QuizResult"
+import { Button } from "@mui/material"
+import QuizIcon from '@mui/icons-material/Quiz';
 
 function QuizQuestions(){
 
@@ -129,7 +131,15 @@ function QuizQuestions(){
         :
         (<div>
             {questionElements}
-            <button onClick={submitQuiz}>Submit Quiz</button>
+            <Button
+            onClick={submitQuiz}
+              variant="contained"
+              startIcon={<QuizIcon />}
+              sx={{ mt: 2 }}
+              
+             >
+                Submit Quiz
+            </Button>
         </div>)
     )
 }

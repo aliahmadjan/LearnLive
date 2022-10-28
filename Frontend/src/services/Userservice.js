@@ -22,7 +22,6 @@ export async function uploadAssignment(assignmentno,topic,description,marks,file
   const response = await axios.post(tempURL, {
     assignmentno,topic,description,marks,file
   });
-  console.log("MFSSSSS",file)
   if (response.status === 201) {
     return response;
   } else if (response.status === 401) {
